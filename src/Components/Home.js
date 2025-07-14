@@ -102,7 +102,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-green-50 p-4 flex items-center justify-center relative">
+    <div className="min-h-screen bg-green-50 p-4 flex flex-col items-center justify-center relative">
       {/* Toast Notification */}
       {toastMessage.text && (
         <div
@@ -121,8 +121,8 @@ export default function Home() {
         </div>
       )}
 
-      <div className="max-w-2xl w-full bg-white rounded-xl shadow-lg p-6 relative">
-        <h1 className="text-3xl font-extrabold mb-4 text-center text-green-800">
+      <div className="max-w-2xl w-full sm:w-11/12 bg-white rounded-xl shadow-lg p-6 relative">
+        <h1 className="text-2xl sm:text-3xl font-extrabold mb-4 text-center text-green-800">
           🌱 Greener Product Recommender
         </h1>
 
@@ -130,9 +130,10 @@ export default function Home() {
         <div className="absolute top-4 right-4">
           <button
             onClick={() => setShowCart(!showCart)}
-            className="relative p-2 bg-emerald-600 text-white rounded-full"
+            className="relative p-2 bg-emerald-600 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-400"
+            aria-label="Toggle Cart"
           >
-            <FaShoppingCart />
+            <FaShoppingCart className="w-5 h-5 sm:w-6 sm:h-6" />
             {getTotalItemsInCart() > 0 && (
               <span className="absolute -top-1 -right-1 bg-red-600 text-xs rounded-full px-2">
                 {getTotalItemsInCart()}
@@ -148,13 +149,13 @@ export default function Home() {
             placeholder="Enter product name"
             value={productName}
             onChange={(e) => setProductName(e.target.value)}
-            className="w-full border px-4 py-2 rounded"
+            className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400"
           />
 
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-full border px-4 py-2 rounded"
+            className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400"
           >
             <option value="">Select Category</option>
             {categories.map((cat, index) => (
@@ -167,13 +168,13 @@ export default function Home() {
           <button
             onClick={handleSuggest}
             disabled={loading}
-            className="w-full bg-green-600 text-white py-2 rounded"
+            className="w-full bg-green-600 text-white py-2 rounded disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {loading ? "Loading..." : "Suggest Greener Alternative"}
           </button>
         </div>
 
-        {error && <p className="text-red-500">{error}</p>}
+        {error && <p className="text-red-500 text-center">{error}</p>}
 
         {/* Suggestion Result */}
         {suggestion && !suggestion.message && (
@@ -190,7 +191,7 @@ export default function Home() {
             </p>
             <button
               onClick={() => addToCart(suggestion)}
-              className="mt-2 bg-lime-600 text-white px-4 py-2 rounded"
+              className="mt-2 w-full sm:w-auto bg-lime-600 text-white px-4 py-2 rounded"
             >
               Add to Cart
             </button>
@@ -198,7 +199,7 @@ export default function Home() {
         )}
 
         {suggestion?.message && (
-          <div className="mt-4 p-4 bg-blue-100 rounded text-blue-700">
+          <div className="mt-4 p-4 bg-blue-100 rounded text-blue-700 text-center">
             {suggestion.message}
           </div>
         )}
@@ -207,22 +208,23 @@ export default function Home() {
       {/* Shopping Cart Side Panel */}
       {showCart && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-end z-50">
-          <div className="bg-white w-full max-w-sm h-full p-6 overflow-y-auto relative">
+          <div className="bg-white w-full max-w-sm sm:max-w-md h-full p-6 overflow-y-auto relative">
             <button
               onClick={() => setShowCart(false)}
-              className="absolute top-4 right-4 text-2xl font-bold"
+              className="absolute top-4 right-4 text-3xl font-bold leading-none focus:outline-none"
+              aria-label="Close Cart"
             >
               &times;
             </button>
-            <h2 className="text-xl font-bold mb-4">Your Cart</h2>
+            <h2 className="text-xl font-bold mb-4 text-center">Your Cart</h2>
             {cartItems.length === 0 ? (
-              <p>Your cart is empty.</p>
+              <p className="text-center">Your cart is empty.</p>
             ) : (
               <>
                 {cartItems.map((item, index) => (
                   <div
                     key={index}
-                    className="mb-4 border-b pb-2 flex justify-between items-center"
+                    className="mb-4 border-b pb-2 flex flex-col sm:flex-row sm:justify-between sm:items-center"
                   >
                     <div>
                       <p className="font-semibold">{item.greener_alternative}</p>
@@ -230,7 +232,7 @@ export default function Home() {
                         Quantity: {item.quantity} | ₹{item.price}
                       </p>
                     </div>
-                    <div className="flex gap-1">
+                    <div className="flex gap-1 mt-2 sm:mt-0">
                       <button
                         onClick={() =>
                           updateQuantity(item.greener_alternative, -1)
@@ -259,9 +261,7 @@ export default function Home() {
                   </div>
                 ))}
 
-                <div className="text-right font-bold mb-4">
-                  Total: ₹{getTotalCartValue()}
-                </div>
+                <div className="text-right font-bold mb-4">Total: ₹{getTotalCartValue()}</div>
 
                 <button
                   onClick={handleCheckout}
@@ -283,10 +283,10 @@ export default function Home() {
 
       {/* Confirm Clear Cart */}
       {showClearCartConfirm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded shadow-md">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
+          <div className="bg-white p-6 rounded shadow-md max-w-sm w-full">
             <p>Are you sure you want to clear the cart?</p>
-            <div className="flex justify-end mt-4 gap-3">
+            <div className="flex justify-end mt-4 gap-3 flex-wrap">
               <button
                 onClick={() => {
                   clearCart();
