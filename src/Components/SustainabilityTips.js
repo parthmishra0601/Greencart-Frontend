@@ -1,6 +1,5 @@
-// src/Components/SustainabilityTips.jsx
 import React from "react";
-import { FiAlertCircle } from "react-icons/fi"; // Icon import from react-icons
+import { FiAlertCircle } from "react-icons/fi";
 
 const tips = [
   {
@@ -40,24 +39,26 @@ const tips = [
 export default function SustainabilityTips() {
   return (
     <div className="flex min-h-screen w-full bg-gray-50 font-sans overflow-hidden">
-      <main className="flex-grow p-8 overflow-y-auto">
-        <h2 className="text-4xl font-extrabold text-emerald-800 mb-8">
+      <main className="flex-grow p-4 sm:p-8 overflow-y-auto">
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-emerald-800 mb-8 text-center sm:text-left">
           Sustainability Tips
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {tips.map((tip, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group"
+              className="bg-white p-5 sm:p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group"
             >
               <div className="flex items-center mb-3">
-                <FiAlertCircle className="text-2xl mr-3 text-emerald-500 group-hover:scale-110 transition-transform duration-300" />
-                <h3 className="text-xl font-bold text-gray-800">
+                <FiAlertCircle className="text-xl sm:text-2xl mr-3 text-emerald-500 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="text-lg sm:text-xl font-bold text-gray-800">
                   {tip.title}
                 </h3>
               </div>
-              <p className="text-lg text-gray-700 leading-relaxed">{tip.description}</p>
+              <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
+                {tip.description}
+              </p>
             </div>
           ))}
         </div>
