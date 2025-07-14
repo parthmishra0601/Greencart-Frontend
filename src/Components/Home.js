@@ -41,7 +41,7 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/categories")
+      .get("https://greencart-ai-5.onrender.com/categories")
       .then((res) => setCategories(res.data))
       .catch((err) => {
         console.error("Error fetching categories:", err);
@@ -61,7 +61,7 @@ export default function Home() {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/recommend", {
+      const response = await axios.post("https://greencart-ai-5.onrender.com/recommend", {
         product: productName,
         category: selectedCategory,
       });
