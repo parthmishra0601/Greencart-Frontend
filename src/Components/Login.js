@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { FaUserCircle, FaLock } from "react-icons/fa";
 import { useNavigate, Link } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -15,16 +17,11 @@ export default function LoginPage() {
     setError("");
     setLoading(true);
 
-    const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-    const validUser = storedUsers.find(user => user.email === email && user.password === password);
-
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    if (validUser) {
-      localStorage.setItem("mockAuthToken", "fake-jwt-token-12345");
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
       alert("Login successful! Redirecting to home.");
       navigate("/");
-    } else {
+    } catch (err) {
       setError("Invalid email or password.");
     }
 
@@ -48,7 +45,7 @@ export default function LoginPage() {
             <div className="relative">
               <FaUserCircle className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
               <input
-                type="text"
+                type="email"
                 id="email"
                 className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-400 focus:border-transparent outline-none text-gray-700"
                 placeholder="you@example.com"

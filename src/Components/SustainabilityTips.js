@@ -1,6 +1,6 @@
 // src/Components/SustainabilityTips.jsx
 import React from "react";
-
+import { FiAlertCircle } from "react-icons/fi"; // Icon import from react-icons
 
 const tips = [
   {
@@ -40,23 +40,19 @@ const tips = [
 export default function SustainabilityTips() {
   return (
     <div className="flex min-h-screen w-full bg-gray-50 font-sans overflow-hidden">
-      {/* Include the Sidebar for consistent navigation */}
-      
-
       <main className="flex-grow p-8 overflow-y-auto">
         <h2 className="text-4xl font-extrabold text-emerald-800 mb-8">
-          Sustainability Tips <span className="text-emerald-600">🌿</span>
+          Sustainability Tips
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {tips.map((tip, index) => (
             <div
-              key={index} // Using index as key is okay if list order is static and items aren't removed/added
+              key={index}
               className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group"
             >
               <div className="flex items-center mb-3">
-                {/* Dynamic icon or a consistent icon for tips */}
-                <span className="text-3xl mr-3 text-emerald-500 group-hover:scale-110 transition-transform duration-300">💡</span>
+                <FiAlertCircle className="text-2xl mr-3 text-emerald-500 group-hover:scale-110 transition-transform duration-300" />
                 <h3 className="text-xl font-bold text-gray-800">
                   {tip.title}
                 </h3>

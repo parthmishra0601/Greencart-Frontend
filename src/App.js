@@ -3,7 +3,6 @@ import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Sidebar from './Components/Sidebar';
 import Home from './Components/Home';
-import Cart from './Components/Cart';
 import Dashboard from './Components/Dashboard';
 import SavedLists from './Components/SavedLists';
 import SustainabilityTips from './Components/SustainabilityTips';
@@ -28,9 +27,9 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/" element={<Home />} />
-            <Route path="/cart" element={<Cart />} />
+            
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/saved" element={<SavedLists />} />
+            
             <Route path="/tips" element={<SustainabilityTips />} />
           </Routes>
         </CartProvider>

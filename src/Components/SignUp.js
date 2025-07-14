@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { FaUserCircle, FaLock, FaEnvelope } from "react-icons/fa";
 import { useNavigate, Link } from "react-router-dom";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../firebase";
 
 export default function SignupPage() {
   const [name, setName] = useState("");
@@ -23,22 +25,25 @@ export default function SignupPage() {
       return;
     }
 
-    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-    const userExists = existingUsers.some((user) => user.email === email);
+    try {
+      // Create user in Firebase
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-    if (userExists) {
-      setError("A user with this email already exists.");
-      setLoading(false);
-      return;
+      // Update display name
+      await updateProfile(userCredential.user, {
+        displayName: name,
+      });
+
+      alert("Signup successful! Redirecting to login...");
+      navigate("/login");
+    } catch (err) {
+      if (err.code === "auth/email-already-in-use") {
+        setError("A user with this email already exists.");
+      } else {
+        setError("Signup failed. Please try again.");
+      }
     }
 
-    const newUser = { name, email, password };
-    const updatedUsers = [...existingUsers, newUser];
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
-
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    alert("Signup successful! Redirecting to login...");
-    navigate("/login");
     setLoading(false);
   };
 

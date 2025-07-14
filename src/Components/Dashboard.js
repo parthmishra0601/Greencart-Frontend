@@ -156,15 +156,15 @@ export default function Dashboard() {
             <h3 className="text-2xl font-bold text-emerald-800 mb-5">Your Environmental Impact</h3>
             <ul className="text-lg text-gray-700 space-y-3">
               <li className="flex items-center">
-                <span className="text-green-500 mr-3 text-2xl">🌱</span>
+                
                 Plastic saved: <span className="font-semibold ml-2">1.2kg</span>
               </li>
               <li className="flex items-center">
-                <span className="text-blue-500 mr-3 text-2xl">💧</span>
+            
                 Water saved: <span className="font-semibold ml-2">30L</span>
               </li>
               <li className="flex items-center">
-                <span className="text-gray-500 mr-3 text-2xl">💨</span>
+                
                 CO₂ reduced: <span className="font-semibold ml-2">4.5kg</span>
               </li>
             </ul>

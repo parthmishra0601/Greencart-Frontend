@@ -348,7 +348,7 @@ export default function Home() {
               <div className="space-y-3">
                 {favoriteItems.map((item) => (
                   <div key={item.id} className="flex items-center bg-gray-50 p-3 rounded-lg border border-gray-200 shadow-sm">
-                    <span className="text-emerald-400 mr-3 text-3xl">🌿</span>
+            
                     <div>
                       <h4 className="font-semibold text-gray-800">{item.name}</h4>
                       <p className="text-sm text-gray-600">${item.price.toFixed(2)} - {item.category}</p>
@@ -371,11 +371,11 @@ export default function Home() {
           <div className="bg-white p-6 shadow-xl rounded-xl border border-gray-100 self-start">
             <h3 className="text-2xl font-bold text-emerald-800 mb-4">Your Environmental Impact</h3>
             <ul className="text-lg text-gray-700 space-y-3">
-              <li className="flex items-center"><span className="text-green-500 mr-3 text-2xl">♻️</span>Plastic Saved: <span className="font-semibold ml-2">{environmentalImpact.plastic.toFixed(2)}kg</span></li>
-              <li className="flex items-center"><span className="text-blue-500 mr-3 text-2xl">💧</span>Water Saved: <span className="font-semibold ml-2">{environmentalImpact.water.toFixed(2)}L</span></li>
-              <li className="flex items-center"><span className="text-gray-500 mr-3 text-2xl">💨</span>CO₂ Reduced: <span className="font-semibold ml-2">{environmentalImpact.co2.toFixed(2)}kg</span></li>
+              <li className="flex items-center"><span className="text-green-500 mr-3 text-2xl"></span>Plastic Saved: <span className="font-semibold ml-2">{environmentalImpact.plastic.toFixed(2)}kg</span></li>
+              <li className="flex items-center"><span className="text-blue-500 mr-3 text-2xl"></span>Water Saved: <span className="font-semibold ml-2">{environmentalImpact.water.toFixed(2)}L</span></li>
+              <li className="flex items-center"><span className="text-gray-500 mr-3 text-2xl"></span>CO₂ Reduced: <span className="font-semibold ml-2">{environmentalImpact.co2.toFixed(2)}kg</span></li>
               <li className="flex items-center pt-2 border-t border-gray-200 mt-2">
-                <span className="text-yellow-600 mr-3 text-2xl">🌟</span>Eco-Score:
+                <span className="text-yellow-600 mr-3 text-2xl"></span>Eco-Score:
                 <span className={`font-extrabold text-xl ml-2 ${environmentalImpact.ecoScore >= 0 ? 'text-emerald-700' : 'text-red-700'}`}>
                   {environmentalImpact.ecoScore}
                 </span>
@@ -414,12 +414,7 @@ export default function Home() {
                 </span>
               </p>
             </div>
-            <button
-              className="mt-6 w-full bg-white text-emerald-700 py-3 rounded-lg font-bold text-lg hover:bg-emerald-50 hover:text-emerald-800 transition-all duration-300 shadow-md"
-              onClick={handleGoToCart}
-            >
-              Go to Cart ({cartItems.length})
-            </button>
+            
           </div>
         </div>
       </main>

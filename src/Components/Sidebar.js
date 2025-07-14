@@ -1,21 +1,21 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom";
+
+// ✅ React Icons Imports
+import { FaHome, FaChartBar, FaLeaf, FaSignOutAlt } from "react-icons/fa"; // Icons
 
 const navItems = [
-  { label: "Home", icon: "🏠", path: "/" },
-  { label: "Cart", icon: "🛒", path: "/cart" },
-  { label: "Dashboard", icon: "📊", path: "/dashboard" },
-  { label: "Saved Lists", icon: "💾", path: "/saved" },
-  { label: "Sustainability Tips", icon: "🌿", path: "/tips" },
+  { label: "Home", icon: <FaHome />, path: "/" },
+  { label: "Dashboard", icon: <FaChartBar />, path: "/dashboard" },
+  { label: "Sustainability Tips", icon: <FaLeaf />, path: "/tips" },
 ];
 
 export default function Sidebar() {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    // In a real application, you would also clear user session data here (e.g., tokens from localStorage)
     console.log("User logged out!");
-    navigate("/login"); // Redirect to the login page
+    navigate("/login");
   };
 
   return (
@@ -38,10 +38,10 @@ export default function Sidebar() {
       {/* Bottom section */}
       <div className="p-6 border-t border-emerald-600">
         <button
-          onClick={handleLogout} // Attach the click handler here
+          onClick={handleLogout}
           className="w-full bg-emerald-600 hover:bg-emerald-800 text-white py-3 rounded-lg transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
         >
-          <span>🚪</span>
+          <FaSignOutAlt className="text-xl" />
           <span>Logout</span>
         </button>
       </div>
