@@ -1,8 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-// ✅ React Icons Imports
-import { FaHome, FaChartBar, FaLeaf, FaSignOutAlt } from "react-icons/fa"; // Icons
+import { FaHome, FaChartBar, FaLeaf, FaSignOutAlt } from "react-icons/fa";
 
 const navItems = [
   { label: "Home", icon: <FaHome />, path: "/" },
@@ -19,10 +17,12 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="h-screen w-64 bg-emerald-700 shadow-2xl flex flex-col text-white">
+    <aside className="min-h-screen w-64 bg-emerald-700 shadow-2xl flex flex-col text-white sticky top-0">
       {/* Top section */}
-      <div className="p-6 flex-1 flex flex-col">
-        <h1 className="text-3xl font-extrabold text-white mb-8 mt-2">GreenCart AI</h1>
+      <div className="px-6 pt-6 flex-1 flex flex-col">
+        <h1 className="text-3xl font-extrabold text-white mb-8 mt-2">
+          GreenCart AI
+        </h1>
         <nav className="space-y-3 flex-1">
           {navItems.map((item) => (
             <Link key={item.path} to={item.path} className="block">
@@ -35,8 +35,8 @@ export default function Sidebar() {
         </nav>
       </div>
 
-      {/* Bottom section */}
-      <div className="p-6 border-t border-emerald-600">
+      {/* Bottom Logout section */}
+      <div className="px-6 pb-6">
         <button
           onClick={handleLogout}
           className="w-full bg-emerald-600 hover:bg-emerald-800 text-white py-3 rounded-lg transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"

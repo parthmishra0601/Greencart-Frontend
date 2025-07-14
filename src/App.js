@@ -4,7 +4,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Sidebar from './Components/Sidebar';
 import Home from './Components/Home';
 import Dashboard from './Components/Dashboard';
-import SavedLists from './Components/SavedLists';
+// import SavedLists from './Components/SavedLists';
 import SustainabilityTips from './Components/SustainabilityTips';
 import LoginPage from './Components/Login';
 import SignupPage from './Components/SignUp';
@@ -18,23 +18,24 @@ function App() {
   const showSidebar = !hideSidebarPaths.includes(location.pathname);
 
   return (
-    <div className="bg-gray-50 min-h-screen flex">
-      {showSidebar && <Sidebar />}
+    // ✅ Wrapping everything inside CartProvider so all components have access to cart
+    <CartProvider>
+      <div className="bg-white-600 min-h-screen flex">
+        {/* Sidebar shown conditionally */}
+        {showSidebar && <Sidebar />}
 
-      <div className="flex-grow flex items-center justify-center">
-        <CartProvider>
+        {/* Main content area */}
+        <div className="flex-grow bg-emerald-600">
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/" element={<Home />} />
-            
             <Route path="/dashboard" element={<Dashboard />} />
-            
             <Route path="/tips" element={<SustainabilityTips />} />
           </Routes>
-        </CartProvider>
+        </div>
       </div>
-    </div>
+    </CartProvider>
   );
 }
 

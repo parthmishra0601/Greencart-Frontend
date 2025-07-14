@@ -1,3 +1,4 @@
+// Dashboard.js
 import React, { useState, useEffect } from "react";
 import { useCart } from "./CartContext";
 
@@ -14,7 +15,6 @@ export default function Dashboard() {
   );
   const remaining = budget - total;
 
-  // Handle weekly reset logic
   useEffect(() => {
     const storedBudget = localStorage.getItem("weeklyBudget");
     const storedResetDate = localStorage.getItem("lastReset");
@@ -23,19 +23,17 @@ export default function Dashboard() {
     const lastReset = storedResetDate ? new Date(storedResetDate) : null;
 
     if (!storedBudget || !lastReset || now - lastReset > 7 * 24 * 60 * 60 * 1000) {
-      // Reset budget
       localStorage.setItem("weeklyBudget", DEFAULT_WEEKLY_BUDGET);
       localStorage.setItem("lastReset", now.toISOString());
       setBudget(DEFAULT_WEEKLY_BUDGET);
     } else {
-      // Use stored budget
       setBudget(parseFloat(storedBudget));
     }
   }, []);
 
   useEffect(() => {
     if (remaining < -10) {
-      alert("Uh oh! Your spending has significantly exceeded your budget. Time to restore your balance!");
+      alert("Uh oh! Your spending has significantly exceeded your budget.");
     }
   }, [remaining]);
 
@@ -79,26 +77,23 @@ export default function Dashboard() {
               </p>
               <p className="flex justify-between items-center text-2xl font-extrabold pt-2 border-t border-emerald-400 mt-2">
                 <span>Remaining:</span>
-                <span className={`${remaining < 0 ? 'text-red-200' : 'text-green-100'}`}>${remaining.toFixed(2)}</span>
+                <span className={`${remaining < 0 ? 'text-red-200' : 'text-green-100'}`}>
+                  ${remaining.toFixed(2)}
+                </span>
               </p>
               <p className="text-sm text-emerald-100 mt-2">
                 Next budget reset on: <span className="font-semibold">{getNextResetDate()}</span>
               </p>
-
-              {/* Always show extra budget option */}
-              <div className="mt-6 bg-white bg-opacity-90 p-4 rounded-xl shadow-lg transition-all duration-300 text-emerald-900">
+              <div className="mt-6 bg-white bg-opacity-90 p-4 rounded-xl shadow-lg text-emerald-900">
                 <div className="flex items-start gap-3 mb-3">
                   <div className="text-3xl text-yellow-500">💡</div>
                   <div>
-                    <p className="text-lg font-semibold">
-                      Need More Budget?
-                    </p>
+                    <p className="text-lg font-semibold">Need More Budget?</p>
                     <p className="text-sm text-gray-700">
                       Add more budget if you really need to buy something essential.
                     </p>
                   </div>
                 </div>
-
                 <div className="flex flex-col sm:flex-row items-center gap-3">
                   <input
                     type="number"
@@ -130,22 +125,19 @@ export default function Dashboard() {
               </p>
             ) : (
               <ul className="text-gray-700 space-y-4">
-                {cartItems.map((item) => (
-                  <li
-                    key={item.id}
-                    className="flex justify-between items-center bg-gray-50 p-4 rounded-lg border border-gray-100"
-                  >
+                {cartItems.map((item, index) => (
+                  <li key={index} className="flex justify-between items-center bg-gray-50 p-4 rounded-lg border border-gray-100">
                     <span className="text-lg font-medium text-gray-800">
-                      {item.name} {item.quantity > 1 && `(x${item.quantity})`}
+                      {item.greener_alternative} {item.quantity > 1 && `(x${item.quantity})`}
                     </span>
                     <span className="text-lg font-semibold text-emerald-600">
-                      ${(item.price * (item.quantity || 1)).toFixed(2)}
+                      ₹{(item.price * (item.quantity || 1)).toFixed(2)}
                     </span>
                   </li>
                 ))}
                 <li className="flex justify-between items-center text-xl font-bold text-emerald-700 pt-4 border-t border-gray-200 mt-4">
                   <span>Total Cart Value:</span>
-                  <span>${total.toFixed(2)}</span>
+                  <span>₹{total.toFixed(2)}</span>
                 </li>
               </ul>
             )}
@@ -155,18 +147,9 @@ export default function Dashboard() {
           <div className="bg-white p-8 rounded-xl shadow-xl border border-gray-100">
             <h3 className="text-2xl font-bold text-emerald-800 mb-5">Your Environmental Impact</h3>
             <ul className="text-lg text-gray-700 space-y-3">
-              <li className="flex items-center">
-                
-                Plastic saved: <span className="font-semibold ml-2">1.2kg</span>
-              </li>
-              <li className="flex items-center">
-            
-                Water saved: <span className="font-semibold ml-2">30L</span>
-              </li>
-              <li className="flex items-center">
-                
-                CO₂ reduced: <span className="font-semibold ml-2">4.5kg</span>
-              </li>
+              <li>Plastic saved: <span className="font-semibold ml-2">1.2kg</span></li>
+              <li>Water saved: <span className="font-semibold ml-2">30L</span></li>
+              <li>CO₂ reduced: <span className="font-semibold ml-2">4.5kg</span></li>
             </ul>
           </div>
 
@@ -175,9 +158,9 @@ export default function Dashboard() {
             <h3 className="text-2xl font-bold text-emerald-800 mb-5">Sustainability Tips</h3>
             <ul className="list-disc list-inside text-lg text-gray-700 space-y-2">
               <li>Use <strong>reusable shopping bags</strong> whenever you go out.</li>
-              <li>Prioritize products with <strong>biodegradable or minimal packaging</strong>.</li>
-              <li><strong>Buy local and seasonal produce</strong> to support local economies and reduce carbon footprint.</li>
-              <li>Consider the <strong>lifecycle</strong> of a product before purchasing it.</li>
+              <li>Choose <strong>biodegradable or minimal packaging</strong> products.</li>
+              <li><strong>Buy local and seasonal produce</strong> to reduce your carbon footprint.</li>
+              <li>Always consider the <strong>product's lifecycle</strong> before buying.</li>
             </ul>
           </div>
         </div>
