@@ -1,4 +1,3 @@
-// Dashboard.js
 import React, { useState, useEffect } from "react";
 import { useCart } from "./CartContext";
 
@@ -59,13 +58,15 @@ export default function Dashboard() {
 
   return (
     <div className="flex h-screen w-full bg-gray-50 font-sans overflow-hidden">
-      <main className="flex-grow p-8 overflow-y-auto">
-        <h2 className="text-4xl font-extrabold text-emerald-800 mb-8">Dashboard Overview</h2>
+      <main className="flex-grow p-4 sm:p-8 overflow-y-auto">
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-emerald-800 mb-8 text-center sm:text-left">
+          Dashboard Overview
+        </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {/* Budget Summary */}
-          <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-8 rounded-xl shadow-xl text-white transform hover:scale-[1.02] transition-transform duration-300">
-            <h3 className="text-2xl font-bold mb-4">Budget Summary</h3>
+          <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-6 sm:p-8 rounded-xl shadow-xl text-white transform hover:scale-[1.02] transition-transform duration-300">
+            <h3 className="text-xl sm:text-2xl font-bold mb-4">Budget Summary</h3>
             <div className="space-y-3">
               <p className="flex justify-between items-center text-lg">
                 <span>Budget:</span>
@@ -75,21 +76,21 @@ export default function Dashboard() {
                 <span>Spent:</span>
                 <span className="font-semibold text-xl">${total.toFixed(2)}</span>
               </p>
-              <p className="flex justify-between items-center text-2xl font-extrabold pt-2 border-t border-emerald-400 mt-2">
+              <p className="flex justify-between items-center text-xl sm:text-2xl font-extrabold pt-2 border-t border-emerald-400 mt-2">
                 <span>Remaining:</span>
-                <span className={`${remaining < 0 ? 'text-red-200' : 'text-green-100'}`}>
+                <span className={`${remaining < 0 ? "text-red-200" : "text-green-100"}`}>
                   ${remaining.toFixed(2)}
                 </span>
               </p>
-              <p className="text-sm text-emerald-100 mt-2">
+              <p className="text-xs sm:text-sm text-emerald-100 mt-2">
                 Next budget reset on: <span className="font-semibold">{getNextResetDate()}</span>
               </p>
               <div className="mt-6 bg-white bg-opacity-90 p-4 rounded-xl shadow-lg text-emerald-900">
                 <div className="flex items-start gap-3 mb-3">
-                  <div className="text-3xl text-yellow-500">💡</div>
+                  <div className="text-2xl sm:text-3xl text-yellow-500">💡</div>
                   <div>
-                    <p className="text-lg font-semibold">Need More Budget?</p>
-                    <p className="text-sm text-gray-700">
+                    <p className="text-base sm:text-lg font-semibold">Need More Budget?</p>
+                    <p className="text-xs sm:text-sm text-gray-700">
                       Add more budget if you really need to buy something essential.
                     </p>
                   </div>
@@ -116,8 +117,10 @@ export default function Dashboard() {
           </div>
 
           {/* Cart Summary */}
-          <div className="bg-white p-8 rounded-xl shadow-xl border border-gray-100 md:col-span-1 lg:col-span-2">
-            <h3 className="text-2xl font-bold text-emerald-800 mb-5">Your Current Cart</h3>
+          <div className="bg-white p-6 sm:p-8 rounded-xl shadow-xl border border-gray-100 md:col-span-1 lg:col-span-2 overflow-auto max-h-[400px] sm:max-h-[500px]">
+            <h3 className="text-xl sm:text-2xl font-bold text-emerald-800 mb-5 text-center sm:text-left">
+              Your Current Cart
+            </h3>
             {cartItems.length === 0 ? (
               <p className="text-lg text-gray-600 py-8 text-center bg-gray-50 rounded-lg">
                 <span className="text-5xl block mb-2">🛒</span>
@@ -126,7 +129,10 @@ export default function Dashboard() {
             ) : (
               <ul className="text-gray-700 space-y-4">
                 {cartItems.map((item, index) => (
-                  <li key={index} className="flex justify-between items-center bg-gray-50 p-4 rounded-lg border border-gray-100">
+                  <li
+                    key={index}
+                    className="flex justify-between items-center bg-gray-50 p-4 rounded-lg border border-gray-100"
+                  >
                     <span className="text-lg font-medium text-gray-800">
                       {item.greener_alternative} {item.quantity > 1 && `(x${item.quantity})`}
                     </span>
@@ -144,19 +150,25 @@ export default function Dashboard() {
           </div>
 
           {/* Environmental Impact */}
-          <div className="bg-white p-8 rounded-xl shadow-xl border border-gray-100">
-            <h3 className="text-2xl font-bold text-emerald-800 mb-5">Your Environmental Impact</h3>
-            <ul className="text-lg text-gray-700 space-y-3">
-              <li>Plastic saved: <span className="font-semibold ml-2">1.2kg</span></li>
-              <li>Water saved: <span className="font-semibold ml-2">30L</span></li>
-              <li>CO₂ reduced: <span className="font-semibold ml-2">4.5kg</span></li>
+          <div className="bg-white p-6 sm:p-8 rounded-xl shadow-xl border border-gray-100">
+            <h3 className="text-xl sm:text-2xl font-bold text-emerald-800 mb-5">Your Environmental Impact</h3>
+            <ul className="text-lg sm:text-xl text-gray-700 space-y-3">
+              <li>
+                Plastic saved: <span className="font-semibold ml-2">1.2kg</span>
+              </li>
+              <li>
+                Water saved: <span className="font-semibold ml-2">30L</span>
+              </li>
+              <li>
+                CO₂ reduced: <span className="font-semibold ml-2">4.5kg</span>
+              </li>
             </ul>
           </div>
 
           {/* Sustainability Tips */}
-          <div className="bg-white p-8 rounded-xl shadow-xl border border-gray-100 lg:col-span-2">
-            <h3 className="text-2xl font-bold text-emerald-800 mb-5">Sustainability Tips</h3>
-            <ul className="list-disc list-inside text-lg text-gray-700 space-y-2">
+          <div className="bg-white p-6 sm:p-8 rounded-xl shadow-xl border border-gray-100 lg:col-span-2">
+            <h3 className="text-xl sm:text-2xl font-bold text-emerald-800 mb-5">Sustainability Tips</h3>
+            <ul className="list-disc list-inside text-lg sm:text-xl text-gray-700 space-y-2">
               <li>Use <strong>reusable shopping bags</strong> whenever you go out.</li>
               <li>Choose <strong>biodegradable or minimal packaging</strong> products.</li>
               <li><strong>Buy local and seasonal produce</strong> to reduce your carbon footprint.</li>
